@@ -40,8 +40,8 @@ Board::Board() {
     this->board[7][0] = new Rook(7, 0, "black");
    //  this->board[7][1] = new Knight(7, 1, "black");
      this->board[7][2] = new Bishop(7, 2, "black");
-     this->board[7][3] = new Queen(7, 3, "black");
-    // this->board[7][4] = new King(7, 4, "black");
+     this->board[7][4] = new Queen(7, 4, "black");
+    // this->board[7][3] = new King(7, 3, "black");
      this->board[7][5] = new Bishop(7, 5, "black");
     // this->board[7][6] = new Knight(7, 6, "black");
     this->board[7][7] = new Rook(7, 7, "black");
@@ -67,4 +67,21 @@ Piece* Board::get_piece_at_pos(int x, int y) const {
         return this->board[x][y];
     }
     return nullptr; 
+}
+
+
+void Board::display() const
+{
+    for(int i = 0;i<N;i++)
+    {
+        for(int j=0;j<N;j++)
+        {
+            Piece* p = get_piece_at_pos(i,j);
+            if(p==nullptr)
+            cout << "." << " " ;
+            else
+            cout << p->get_type() << " ";
+        }
+        cout << endl;
+    }
 }

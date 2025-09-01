@@ -1,4 +1,4 @@
-#include <piece.hpp>
+#include "piece.hpp"
 using namespace std;
  
     Piece::Piece(std::string type, int r, int c, string color) : type(type), row(r), col(c), color(color), is_captured(false), has_moved(false) {}
@@ -17,3 +17,5 @@ using namespace std;
     {
         return this->color != piece.color;
     }
+
+    Piece::~Piece(){}

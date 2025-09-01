@@ -1,7 +1,7 @@
 #ifndef PIECE_HPP
 #define PIECE_HPP
 
-#include <Board.hpp>
+#include "Board.hpp"
 #include <iostream>
 #include <string>
 #include <vector>

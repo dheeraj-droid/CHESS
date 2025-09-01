@@ -1,7 +1,10 @@
-#include <Board.hpp>
+#include "Game.hpp"
+
 
 int main()
 {
-    Board new_board1;
-    
+    Game new_game;
+    new_game.play();
+
+    return 0;
 }
