@@ -6,7 +6,7 @@
  #include "Bishop.hpp"
  #include "Queen.hpp"
 // #include "King.hpp"
-// #include "Pawn.hpp"
+ #include "Pawn.hpp"
 
 
 Board::Board() {
@@ -28,15 +28,15 @@ Board::Board() {
      this->board[0][5] = new Bishop(0, 5, "white");
     this->board[0][6] = new Knight(0, 6, "white");
     this->board[0][7] = new Rook(0, 7, "white");
-    // for (int j = 0; j < N; ++j) {
-    //     this->board[1][j] = new Pawn(1, j, "white");
-    // }
+     for (int j = 0; j < N; ++j) {
+         this->board[1][j] = new Pawn(1, j, "white");
+     }
 
 
-    // Black pieces (Row 6 and 7)
-    // for (int j = 0; j < N; ++j) {
-    //     this->board[6][j] = new Pawn(6, j, "black");
-    // }
+    
+     for (int j = 0; j < N; ++j) {
+         this->board[6][j] = new Pawn(6, j, "black");
+     }
     this->board[7][0] = new Rook(7, 0, "black");
     this->board[7][1] = new Knight(7, 1, "black");
      this->board[7][2] = new Bishop(7, 2, "black");

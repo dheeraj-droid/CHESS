@@ -9,7 +9,7 @@
 using namespace std;
 
 class Piece{
-private:
+protected:
 string type;
 int row;
 int col;
