@@ -2,6 +2,6 @@
 
 int main()
 {
-    Board new_board;
+    Board new_board1;
     
 }

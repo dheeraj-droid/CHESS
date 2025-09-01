@@ -19,7 +19,7 @@ Board::Board() {
 
     
 
-    // White pieces (Row 0 and 1)
+   
     this->board[0][0] = new Rook(0, 0, "white");
      //this->board[0][1] = new Knight(0, 1, "white");
      this->board[0][2] = new Bishop(0, 2, "white");
