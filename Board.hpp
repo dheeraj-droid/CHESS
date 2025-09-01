@@ -9,7 +9,8 @@ class Board{
     Piece* board[N][N];
 
     public:
-    Board(){}
+    Board();
+    ~Board();
 
     Piece* get_piece_at_pos(int x,int y) const;
     bool is_empty_and_valid(int x,int y) const;
