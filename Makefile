@@ -9,5 +9,5 @@ build:
 run: build
 	./$(OUTPUT)
 
-cleam:
+clean:
 	rm -f $(OUTPUT)
