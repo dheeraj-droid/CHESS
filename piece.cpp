@@ -11,6 +11,7 @@ using namespace std;
     { 
         return  {this->row,this->col};
     }
+    
 
     bool Piece::is_opponent_piece(const Piece& piece) const
     {
