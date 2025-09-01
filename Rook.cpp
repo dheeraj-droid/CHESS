@@ -2,8 +2,6 @@
 
 Rook::Rook(int r, int c, string color):Piece("ROOK",r,c,color){}
 
-
-
     vector<pair<int,int>> Rook::get_valid_moves(const Board& board) const 
     {
         vector<pair<int,int>> moves;

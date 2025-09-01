@@ -23,9 +23,7 @@ public:
     virtual ~Piece();
     string get_type() const;
     pair<int,int> get_curr_pos() const;
-
     virtual vector<pair<int,int>> get_valid_moves(const Board& board) const  = 0;
-    
      bool is_opponent_piece(const Piece& piece) const ;
 
 };
