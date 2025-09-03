@@ -7,6 +7,30 @@ Pawn::Pawn(int r, int c, string color):Piece("P",r,c,color){
     val = -1;
 }
 
+ void Pawn::add_valid_move_single( int i,int j,vector<pair<int,int>>& moves,const Board& board,bool can_kill) const
+     {
+         if(i<N && j < N && i>=0 && j >= 0 && !can_kill)
+        {
+            Piece* p  =  board.get_piece_at_pos(i,j);
+            if(p==nullptr)
+            moves.push_back({i,j});
+            else if(this->is_opponent_piece(*p))
+            {      
+                moves.push_back({i,j});   
+            }
+        }
+        else if(i<N && j < N && i>=0 && j >= 0 && can_kill)
+        {
+             Piece* p  =  board.get_piece_at_pos(i,j);
+            if(p==nullptr)
+            return;
+            else if(this->is_opponent_piece(*p))
+            {      
+                moves.push_back({i,j});   
+            }
+        }
+     }
+
 
     vector<pair<int,int>> Pawn::get_valid_moves(const Board& board) const 
     {
@@ -15,31 +39,19 @@ Pawn::Pawn(int r, int c, string color):Piece("P",r,c,color){
         int x = curr_pos.first;
         int y = curr_pos.second;
 
-       int i = x + val;
-       int j = y;
-
-        if(!this->has_moved && board.is_empty_and_valid(i,j) &&  board.is_empty_and_valid(i+val,j))
+        if(board.is_empty_and_valid(x+val,y))
         {
-            moves.push_back({i+val,j});
+            add_valid_move_single(x+val,y,moves,board,false);
+            if(!this->has_moved && board.is_empty_and_valid(x+val+val,y))
+            add_valid_move_single(x+val+val,y,moves,board,false);
         }
 
+        
+        add_valid_move_single(x+val,y-1,moves,board,true);
+        add_valid_move_single(x+val,y+1,moves,board,true);
 
-       if(board.is_empty_and_valid(i,j))
-        moves.push_back({i,j});
+      
 
-       j = y - 1;
-       Piece* p = board.get_piece_at_pos(i,j);
-       if( i<N && i>=0 && j<N && j>=0 && p!=nullptr && this->is_opponent_piece(*p))
-       moves.push_back({i,j});
-
-       j = y + 1;
-        p = board.get_piece_at_pos(i,j);
-       if( i<N && i>=0 && j<N && j>=0 && p!=nullptr && this->is_opponent_piece(*p))
-       moves.push_back({i,j});
-
-
-
-       
         return moves;
     }
 

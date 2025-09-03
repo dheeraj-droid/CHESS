@@ -1,0 +1,6 @@
+Need to add castling for king.
+Need to add en passant and pawn promotion for pawns.
+
+
+Move extraction logic.
+2 -player playable format.

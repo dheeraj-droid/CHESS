@@ -18,4 +18,43 @@ using namespace std;
         return this->color != piece.color;
     }
 
+     void Piece::add_valid_move_single( int i,int j,vector<pair<int,int>>& moves,const Board& board) const
+     {
+         if(i<N && j < N && i>=0 && j >= 0)
+        {
+            Piece* p  =  board.get_piece_at_pos(i,j);
+            if(p==nullptr)
+            moves.push_back({i,j});
+            else if(this->is_opponent_piece(*p))
+            {      
+                moves.push_back({i,j});   
+            }
+        }
+     }
+
+     void Piece::add_valid_move_continuous( int i,int j,vector<pair<int,int>>& moves,const Board& board,const int di,const int dj) const
+     {
+        
+        while(i<N && j < N && i>=0 && j >= 0)
+        {
+            Piece* p  =  board.get_piece_at_pos(i,j);
+            if(p==nullptr)
+            moves.push_back({i,j});
+            else if(this->is_opponent_piece(*p))
+            {      
+                moves.push_back({i,j});   
+                break;
+
+            }
+            else
+            break;
+
+            i+=di;
+            j+=dj;
+        }
+     }
+
+     
+
+
     Piece::~Piece(){}

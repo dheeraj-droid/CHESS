@@ -26,6 +26,9 @@ public:
     virtual vector<pair<int,int>> get_valid_moves(const Board& board) const  = 0;
      bool is_opponent_piece(const Piece& piece) const ;
 
+      void add_valid_move_single(const int i,const int j,vector<pair<int,int>>& moves,const Board& board) const;
+      void add_valid_move_continuous(const int i,const int j,vector<pair<int,int>>& moves,const Board& board,const int di,const int dj) const;
+
 };
 
 

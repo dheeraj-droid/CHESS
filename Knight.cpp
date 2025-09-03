@@ -16,18 +16,8 @@ Knight::Knight(int r, int c, string color):Piece("K",r,c,color){}
         {
         int i = x + dir_x[k];
         int j = y + dir_y[k];
-        if(i<N && j < N && i>=0 && j >= 0)
-        {
-            Piece* p  =  board.get_piece_at_pos(i,j);
-            if(p==nullptr)
-            moves.push_back({i,j});
-            else if(this->is_opponent_piece(*p))
-            {
-                moves.push_back({i,j});
-                
-            }
+        add_valid_move_single(i,j,moves,board);
         }
-    }
         
 
         return moves;
