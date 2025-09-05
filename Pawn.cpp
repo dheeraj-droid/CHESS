@@ -14,10 +14,8 @@ Pawn::Pawn(int r, int c, string color):Piece("P",r,c,color){
             Piece* p  =  board.get_piece_at_pos(i,j);
             if(p==nullptr)
             moves.push_back({i,j});
-            else if(this->is_opponent_piece(*p))
-            {      
-                moves.push_back({i,j});   
-            }
+            else 
+            return;
         }
         else if(i<N && j < N && i>=0 && j >= 0 && can_kill)
         {

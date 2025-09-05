@@ -11,8 +11,8 @@
 class ExtractMove {
 public:
   
-    static bool match_pattern(const std::string& move);
-    static std::vector<std::pair<int, int>> get_move(const std::string& move);
+    static bool match_pattern(const std::string& move) ;
+    static std::vector<std::pair<int, int>> get_move(const std::string& move) ;
 };
 
 #endif
