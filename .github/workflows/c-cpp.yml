@@ -16,7 +16,32 @@ jobs:
     
     - name: build
       run: make build
-    - name: run
-      run: make run
-    #- name:  test
-     # run: make test
+
+       # Step 4: Run the application in the background and check if it's stable
+    - name: Check if application runs
+      run:  |
+          # Start the application in the background using your 'make run' command
+          make run &
+          APP_PID=$!
+          
+          # Wait a few seconds to give the app a chance to crash on startup
+          echo "Waiting for 5 seconds to check for immediate crashes..."
+          sleep 5
+          
+          # Check if the process with the captured PID is still running.
+          # If it crashed, 'ps' will fail, and the 'if' condition will be true.
+          if ps -p $APP_PID > /dev/null; then
+            echo "Success: Application started and remained running."
+            # Cleanly stop the background process so the workflow job can finish.
+            kill $APP_PID
+          else
+            echo "Error: Application failed to start or crashed within 5 seconds."
+            exit 1
+          fi
+
+      # Step 5: Run the automated tests using your Makefile
+      # This is the most important CI step. Ensure 'make test' fails (returns non-zero) if tests fail.
+     # - name: Run tests
+     #   run: make test
+        
+
