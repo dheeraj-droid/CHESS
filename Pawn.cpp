@@ -7,6 +7,7 @@ Pawn::Pawn(int r, int c, string color):Piece("P",r,c,color){
     val = -1;
 }
 
+
  void Pawn::add_valid_move_single( int i,int j,vector<pair<int,int>>& moves,const Board& board,bool can_kill) const
      {
          if(i<N && j < N && i>=0 && j >= 0 && !can_kill)

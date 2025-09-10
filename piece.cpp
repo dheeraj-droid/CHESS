@@ -11,6 +11,13 @@ using namespace std;
     { 
         return  {this->row,this->col};
     }
+
+    void Piece::set_curr_pos(const int x, const int y )
+    {
+        this->row = x;
+        this->col = y;
+        return;
+    }
     
 
     bool Piece::is_opponent_piece(const Piece& piece) const
@@ -30,6 +37,33 @@ using namespace std;
                 moves.push_back({i,j});   
             }
         }
+     }
+
+
+      bool Piece::get_if_moved() const
+      {
+        return this->has_moved;
+      }
+
+    bool Piece::get_if_captured() const
+    {
+        return this->is_captured;
+    }
+
+
+    void Piece::set_if_moved(bool val) 
+    {
+        this->has_moved = val;
+    }
+
+    void Piece::set_capture( bool val)
+    {
+        this->is_captured = val;
+    }
+
+     string Piece::get_color() const
+     {
+        return this->color;
      }
 
      void Piece::add_valid_move_continuous( int i,int j,vector<pair<int,int>>& moves,const Board& board,const int di,const int dj) const

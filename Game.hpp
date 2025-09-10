@@ -12,7 +12,7 @@ class Game
     Game();
    
 
-    void play()  const;
+    void play();
     
 
 };

@@ -69,16 +69,24 @@ Piece* Board::get_piece_at_pos(int x, int y) const {
     return nullptr; 
 }
 
+void Board::set_piece_at_pos(Piece* p,int x,int y)
+{
+    this->board[x][y] = p;
+    return;
+}
+
 
 void Board::display() const
 {
-    for(int i = 0;i<N;i++)
+    for(int i = N-1;i>=0;i--)
     {
         for(int j=0;j<N;j++)
         {
             Piece* p = get_piece_at_pos(i,j);
             if(p==nullptr)
             cout << "." << " " ;
+            else if(p->get_color() == "black")
+            cout <<"\033[1;30m" << p->get_type() << " \033[0m";
             else
             cout << p->get_type() << " ";
         }

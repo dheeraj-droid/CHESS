@@ -1,6 +1,6 @@
 #include "Knight.hpp"
 
-Knight::Knight(int r, int c, string color):Piece("K",r,c,color){}
+Knight::Knight(int r, int c, string color):Piece("N",r,c,color){}
 
     vector<pair<int,int>> Knight::get_valid_moves(const Board& board) const 
     {
