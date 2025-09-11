@@ -1,5 +1,5 @@
 Need to add castling for king.
-Need to add en passant and pawn promotion for pawns.
+Need to add en passant and (pawn promotion for pawns.)-done
 
 
 Move extraction logic -  done.

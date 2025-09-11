@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include <utility>
+class Board;
 using namespace std;
 
 class Piece{
@@ -17,7 +18,12 @@ bool is_captured;
 string color;
 bool has_moved;
 
-public:
+
+ void add_valid_move_single(const int i,const int j,vector<pair<int,int>>& moves,const Board& board) const;
+      void add_valid_move_continuous(const int i,const int j,vector<pair<int,int>>& moves,const Board& board,const int di,const int dj) const;
+
+
+    public:
 
     Piece(string type,int x,int y,string color);
     virtual ~Piece();
@@ -30,11 +36,11 @@ public:
     void set_if_moved(bool val) ;
     void set_capture( bool val);
 
+    Piece* promote(Piece* curr_piece) ;
     virtual vector<pair<int,int>> get_valid_moves(const Board& board) const  = 0;
      bool is_opponent_piece(const Piece& piece) const ;
         string get_color() const ;
-      void add_valid_move_single(const int i,const int j,vector<pair<int,int>>& moves,const Board& board) const;
-      void add_valid_move_continuous(const int i,const int j,vector<pair<int,int>>& moves,const Board& board,const int di,const int dj) const;
+     
 
 };
 

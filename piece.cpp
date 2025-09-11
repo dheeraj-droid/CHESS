@@ -20,6 +20,7 @@ using namespace std;
     }
     
 
+
     bool Piece::is_opponent_piece(const Piece& piece) const
     {
         return this->color != piece.color;
@@ -88,7 +89,7 @@ using namespace std;
         }
      }
 
-     
+   
 
 
     Piece::~Piece(){}

@@ -1,11 +1,13 @@
 #include "Pawn.hpp"
 
+
 Pawn::Pawn(int r, int c, string color):Piece("P",r,c,color){
     if(color == "white")
     val = 1;
     else
     val = -1;
 }
+
 
 
  void Pawn::add_valid_move_single( int i,int j,vector<pair<int,int>>& moves,const Board& board,bool can_kill) const
