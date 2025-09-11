@@ -56,10 +56,6 @@ jobs:
     - name: Run tests
       run: make test
     # Step 6: (Optional) Upload test results as artifacts for later inspection
-    - name: Upload test results   
-      if: always()  # Always run this step, even if previous steps failed
-      uses: actions/upload-artifact@v3
-      with:
-        name: test-results
+  
 
         

@@ -1,15 +1,14 @@
-#include "../third_party/googletest/googletest/include/gtest/gtest.h"
-#include "../third_party/googletest/googlemock/include/gmock/gmock.h"
-#include "../src/Board.hpp"
-#include "../src/Pawn.hpp"
-#include "../src/Rook.hpp" // Using Rook as a generic piece for blocking/capturing
+#include "gtest/gtest.h"
+#include "gmock/gmock.h"
+#include "Board.hpp"
+#include "Pawn.hpp"
+#include "Rook.hpp" // Using Rook as a generic piece for blocking/capturing
 
 // Using a matcher from gmock to compare move lists irrespective of order
 using ::testing::UnorderedElementsAre;
 
 class PawnTest : public ::testing::Test {
 protected:
-    
     Board board;
 };
 
@@ -105,3 +104,4 @@ TEST_F(PawnTest, PawnOnEdgeCanCapture) {
         std::make_pair(2, 1)  // capture at b3
     ));
 }
+
