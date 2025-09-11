@@ -1,47 +1,65 @@
+# Workflow name
 name: C/C++ CI
 
+# Controls when the workflow will run
 on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  build:
-
+  # This workflow contains a single job called "build-and-test"
+  build-and-test:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: build
-      run: make 
+    # Step 1: Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-       # Step 4: Run the application in the background and check if it's stable
+    # Step 2: Install necessary build tools (g++, make)
+    # This is a best practice to ensure the runner has the required compilers and tools.
+    - name: Install build dependencies
+      run: sudo apt-get update && sudo apt-get install -y build-essential
+
+    # Step 3: Build the application using the Makefile
+    - name: Build application
+      run: make
+
+    # Step 4: Run a quick "smoke test" to see if the application starts
     - name: Check if application runs
-      run:  |
-          # Start the application in the background using your 'make run' command
-          make run &
-          APP_PID=$!
-          
-          # Wait a few seconds to give the app a chance to crash on startup
-          echo "Waiting for 5 seconds to check for immediate crashes..."
-          sleep 5
-          
-          # Check if the process with the captured PID is still running.
-          # If it crashed, 'ps' will fail, and the 'if' condition will be true.
-          if ps -p $APP_PID > /dev/null; then
-            echo "Success: Application started and remained running."
-            # Cleanly stop the background process so the workflow job can finish.
-            kill $APP_PID
-          else
-            echo "Error: Application failed to start or crashed within 5 seconds."
-            exit 1
-          fi
-
-      # Step 5: Run the automated tests using your Makefile
-      # This is the most important CI step. Ensure 'make test' fails (returns non-zero) if tests fail.
-    - name: Run tests
-        run: make test
+      run: |
+        # Start the application in the background
+        make run &
+        APP_PID=$!
         
+        # Wait a few seconds to check for immediate crashes
+        echo "Waiting for 3 seconds..."
+        sleep 3
+        
+        # Check if the process is still running. If not, exit with an error.
+        if ps -p $APP_PID > /dev/null; then
+          echo "Success: Application started and is running."
+          kill $APP_PID
+        else
+          echo "Error: Application failed to start or crashed."
+          exit 1
+        fi
 
+    # Step 5: Run the automated tests via the Makefile
+    # The 'run' command is now correctly indented and only contains the command to execute.
+    - name: Run tests
+      run: make test
+    # Step 6: (Optional) Upload test results as artifacts for later inspection
+    - name: Upload test results   
+      if: always()  # Always run this step, even if previous steps failed
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-results
+
+        
