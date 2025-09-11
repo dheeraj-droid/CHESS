@@ -41,7 +41,7 @@ jobs:
 
       # Step 5: Run the automated tests using your Makefile
       # This is the most important CI step. Ensure 'make test' fails (returns non-zero) if tests fail.
-      - name: Run tests
+    - name: Run tests
         run: make test
         
 
