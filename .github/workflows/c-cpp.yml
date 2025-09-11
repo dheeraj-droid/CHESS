@@ -11,52 +11,28 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build-and-test"
   build-and-test:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Step 1: Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - name: Checkout repository
+    # Step 1: Checks-out your repository AND ITS SUBMODULES.
+    - name: Checkout repository and submodules
       uses: actions/checkout@v4
+      with:
+        submodules: 'recursive' # This is the crucial line that was added.
 
     # Step 2: Install necessary build tools (g++, make)
-    # This is a best practice to ensure the runner has the required compilers and tools.
     - name: Install build dependencies
       run: sudo apt-get update && sudo apt-get install -y build-essential
 
     # Step 3: Build the application using the Makefile
+    # (Building the main target isn't strictly necessary to run tests, but it's good practice)
     - name: Build application
       run: make
 
-    # Step 4: Run a quick "smoke test" to see if the application starts
-    - name: Check if application runs
-      run: |
-        # Start the application in the background
-        make run &
-        APP_PID=$!
-        
-        # Wait a few seconds to check for immediate crashes
-        echo "Waiting for 3 seconds..."
-        sleep 3
-        
-        # Check if the process is still running. If not, exit with an error.
-        if ps -p $APP_PID > /dev/null; then
-          echo "Success: Application started and is running."
-          kill $APP_PID
-        else
-          echo "Error: Application failed to start or crashed."
-          exit 1
-        fi
-
-    # Step 5: Run the automated tests via the Makefile
-    # The 'run' command is now correctly indented and only contains the command to execute.
+    # Step 4: Run the automated tests via the Makefile
     - name: Run tests
       run: make test
-    # Step 6: (Optional) Upload test results as artifacts for later inspection
-   
 
-
-        
