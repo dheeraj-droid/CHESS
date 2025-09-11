@@ -8,12 +8,12 @@
 			"args": [
 				"-fdiagnostics-color=always",
 				"-g",
-				"${workspaceFolder}\\*.cpp",
+				"${workspaceFolder}/src\\*.cpp",
 				"-o",
-				"${workspaceFolder}\\chess.exe"
+				"${workspaceFolder}/src\\chess.exe"
 			],
 			"options": {
-				"cwd": "${workspaceFolder}"
+				"cwd": "${workspaceFolder}/src"
 			},
 			"problemMatcher": [
 				"$gcc"
