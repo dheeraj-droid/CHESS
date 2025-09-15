@@ -1,8 +1,8 @@
 #include "Pawn.hpp"
 
 
-Pawn::Pawn(int r, int c, string color):Piece("P",r,c,color){
-    if(color == "white")
+Pawn::Pawn(int r, int c, PlayerColor color):Piece(PieceType::Pawn,r,c,color),can_en_passant(false) {
+    if(color == PlayerColor::White)
     val = 1;
     else
     val = -1;

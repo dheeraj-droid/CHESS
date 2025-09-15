@@ -6,7 +6,7 @@
 class Bishop : public Piece {
 public:
   
-    Bishop(int r, int c, string color);
+    Bishop(int r, int c, PlayerColor color);
     vector<pair<int, int>> get_valid_moves(const Board& board) const override;
 };
 

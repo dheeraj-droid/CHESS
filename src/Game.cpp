@@ -5,18 +5,18 @@
 
 Game::Game()
 {
-    curr_player = "white";
+    curr_player_color = PlayerColor::White;
 }
 
 bool Game::is_promotion_possible(Piece* curr_piece,int y) const
 {
-            if (curr_piece->get_type() == "P")
+            if (curr_piece->get_type() == PieceType::Pawn)
             {
-                if (curr_piece->get_color() == "white" && y == 7)
+                if (curr_piece->get_color() == PlayerColor::White && y == 7)
                 {
                     return true;
                 }
-                else if (curr_piece->get_color() == "black" && y == 0)
+                else if (curr_piece->get_color() == PlayerColor::Black && y == 0)
                 {
                     return  true;
                 }
@@ -26,7 +26,7 @@ bool Game::is_promotion_possible(Piece* curr_piece,int y) const
 
 
 
-Piece* Game::promote_pawn(char choice,pair<int,int>& after,string color) 
+Piece* Game::promote_pawn(char choice,pair<int,int>& after,PlayerColor color) 
 {         
                 switch (toupper(choice))
                 {
@@ -45,7 +45,9 @@ Piece* Game::promote_pawn(char choice,pair<int,int>& after,string color)
 
 void Game::display_board_and_prompt() const {
     new_board1.display();
-    std::cout << "Player " << curr_player << ", enter your move (e.g., e2--e4): " << std::endl;
+    string player_col;
+    player_col  = (curr_player_color==PlayerColor::White)?"White" : "Black";
+    std::cout << "Player " << player_col  << ", enter your move (e.g., e2--e4): " << std::endl;
 }
 
 
@@ -56,7 +58,7 @@ string Game::get_player_move() const{
 }
 
 void Game::switch_player() {
-    curr_player = (curr_player == "white") ? "black" : "white";
+    curr_player_color = (curr_player_color == PlayerColor::White) ? PlayerColor::Black : PlayerColor::White;
 }
 
 
@@ -71,7 +73,7 @@ bool Game::validate_move(const vector<pair<int, int>>& positions)  const {
             cout << "INVALID MOVE: No piece at the starting square.Try again.\n" << endl;
              return false;
          }
-         if (p->get_color() != curr_player)
+         if (p->get_color() != curr_player_color)
          {
              cout << "INVALID MOVE: That piece does not belong to you.Try again.\n" << endl;
              return false;
@@ -108,6 +110,8 @@ void Game::execute_move(const vector<pair<int, int>>& positions) {
 
     new_board1.set_piece_at_pos(nullptr, before.first, before.second);
     new_board1.set_piece_at_pos(p, after.first, after.second);
+
+    
 
     if (is_promotion) {
         cout << "Pawn promotion! Enter Q for Queen, N for Knight, R for Rook, B for Bishop: ";

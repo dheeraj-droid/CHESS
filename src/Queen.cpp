@@ -1,6 +1,6 @@
 #include "Queen.hpp"
 
-Queen::Queen(int r, int c, string color):Piece("Q",r,c,color){}
+Queen::Queen(int r, int c, PlayerColor color):Piece(PieceType::Queen ,r,c,color){}
 
     vector<pair<int,int>> Queen::get_valid_moves(const Board& board) const 
     {

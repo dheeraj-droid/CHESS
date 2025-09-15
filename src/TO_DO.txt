@@ -5,6 +5,11 @@ Need to add en passant and (pawn promotion for pawns.)-done
 Move extraction logic -  done.
 2 -player playable format - need to do tests.
 
-check and checkmate.
+
+
+check and checkmate  - partially done - piece capturing logic is done.
 
 game ending condition.
+
+
+add tests for each class and check the working.

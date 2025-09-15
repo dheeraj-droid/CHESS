@@ -1,6 +1,6 @@
 #include "Rook.hpp"
 
-Rook::Rook(int r, int c, string color):Piece("R",r,c,color){}
+Rook::Rook(int r, int c, PlayerColor color):Piece(PieceType::Rook,r,c,color){}
 
     vector<pair<int,int>> Rook::get_valid_moves(const Board& board) const 
     {

@@ -1,6 +1,12 @@
 #include "King.hpp"
 
-King::King(int r, int c, string color):Piece("K",r,c,color){}
+King::King(int r, int c, PlayerColor color):Piece(PieceType::King,r,c,color){}
+
+
+
+    
+
+
 
     vector<pair<int,int>> King::get_valid_moves(const Board& board)  const
     {

@@ -47,7 +47,11 @@
         "cstring": "cpp",
         "ctime": "cpp",
         "map": "cpp",
-        "regex": "cpp"
+        "regex": "cpp",
+        "any": "cpp",
+        "chrono": "cpp",
+        "ratio": "cpp",
+        "variant": "cpp"
     },
     "makefile.configureOnOpen": true
 }

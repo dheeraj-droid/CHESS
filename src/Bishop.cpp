@@ -1,6 +1,6 @@
 #include "Bishop.hpp"
 
-Bishop::Bishop(int r, int c, string color):Piece("B",r,c,color){}
+Bishop::Bishop(int r, int c, PlayerColor color):Piece(PieceType::Bishop,r,c,color){}
 
     vector<pair<int,int>> Bishop::get_valid_moves(const Board& board) const 
     {

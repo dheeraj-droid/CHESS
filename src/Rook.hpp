@@ -6,7 +6,7 @@
 class Rook : public Piece {
 public:
   
-    Rook(int r, int c, string color);
+    Rook(int r, int c, PlayerColor color);
     vector<pair<int, int>> get_valid_moves(const Board& board) const override;
 };
 

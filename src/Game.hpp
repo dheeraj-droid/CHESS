@@ -13,7 +13,7 @@ class Game
 {
     private:
     Board new_board1;
-    string curr_player;
+    PlayerColor curr_player_color;
    
     public:
     Game();
@@ -22,7 +22,7 @@ class Game
     void display_board_and_prompt() const;
     string get_player_move() const;
     void switch_player();
-     Piece* promote_pawn(char choice,pair<int,int>& after,string color) ;
+     Piece* promote_pawn(char choice,pair<int,int>& after,PlayerColor color) ;
     bool validate_move(const vector<pair<int, int>>& positions) const;
     void execute_move(const vector<pair<int, int>>& positions);
     bool check_game_end() ;
