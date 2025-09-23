@@ -23,7 +23,7 @@ TARGET = chess
 TEST_DEPS_OBJS = $(filter-out src/main.o, $(APP_OBJS))
 
 # The test source files themselves
-TEST_SRCS = tests/Pawn_test.cpp
+TEST_SRCS = tests/Pawn_test.cpp tests/Piece_test.cpp
 TEST_OBJS = $(TEST_SRCS:.cpp=.o)
 
 # ADDED: GTest/GMock source files to be compiled directly.

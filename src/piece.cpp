@@ -106,6 +106,7 @@ bool Piece::can_be_captured_in_a_direction(const Board &board, int nx, int ny, i
     //0 - orthogonal,1 - diagonal
         int dx = x + nx;
         int dy = y + ny;
+        
         while (dx >= 0 && dx < N && dy >= 0 && dy < N)
         {
             Piece *first_piece = board.get_piece_at_pos(dx, dy);
@@ -171,7 +172,7 @@ bool Piece::can_be_captured(const Board &board) const
     }
 
     // 3. Check for Pawn attacks directly
-    int pawn_dir = (this->color == PlayerColor::White) ? -1 : 1;
+    int pawn_dir = (this->color == PlayerColor::White) ? 1 : -1;
     int pawn_attack_row = x + pawn_dir;
     for (int j_offset : {-1, 1}) {
         int i = pawn_attack_row;
