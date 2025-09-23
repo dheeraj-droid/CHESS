@@ -93,10 +93,37 @@ bool Game::validate_move(const vector<pair<int, int>>& positions)  const {
          return false;
 }
 
+
+void Game::execute_castling(const vector<pair<int, int>>& positions,Piece* p)
+{
+    pair<int, int> before = positions[0];
+    pair<int, int> after = positions[1];
+
+       if(before.second  > after.second)
+       {
+        Piece* rook = new_board1.get_piece_at_pos(before.first,before.second-4);
+        rook->set_curr_pos(after.first,after.second+1);
+        new_board1.set_piece_at_pos(nullptr,before.first,before.second - 4);
+        new_board1.set_piece_at_pos(rook,after.first,after.second+1);
+       }
+       else
+       {
+        Piece* rook = new_board1.get_piece_at_pos(before.first,before.second+3);
+        rook->set_curr_pos(after.first,after.second-1);
+        new_board1.set_piece_at_pos(nullptr,before.first,before.second + 3);
+        new_board1.set_piece_at_pos(rook,after.first,after.second - 1);
+       }
+       return;
+}
+
+
 void Game::execute_move(const vector<pair<int, int>>& positions) {
     pair<int, int> before = positions[0];
     pair<int, int> after = positions[1];
     Piece *p = new_board1.get_piece_at_pos(before.first, before.second);
+
+      if(p->get_type() == PieceType::King && abs(before.second - after.second) > 1)
+        execute_castling(positions,p);
 
     bool is_promotion = is_promotion_possible(p, after.first);
 

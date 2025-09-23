@@ -4,8 +4,13 @@ King::King(int r, int c, PlayerColor color):Piece(PieceType::King,r,c,color){}
 
 
 
-    
-
+    bool King::is_check(const Board& board) const
+    {
+        if(this->can_be_captured(board))
+        return true;
+        
+        return false;
+    }
 
 
     vector<pair<int,int>> King::get_valid_moves(const Board& board)  const
@@ -22,38 +27,48 @@ King::King(int r, int c, PlayerColor color):Piece(PieceType::King,r,c,color){}
         {
             add_valid_move_single(x+dx[i],y+dy[i],moves,board);
         }
-        /*
-        if(!this->get_if_moved())
+        
+        if(!this->get_if_moved() && !this->is_check(board))
         {
-           if(check_castling(board,x-4,y))
+           if(check_castling(board,-1))
            {
-
+                moves.push_back({x,y-2});
            }
 
-           if(check_castling(board,x+3,y))
+           if(check_castling(board,1))
            {
-        
+                moves.push_back({x,y+2});
            }
         }
-*/
+
         return moves;
     }
 
-    bool King::check_castling( const Board& board,int x,int y) const
+    bool King::check_castling( const Board& board,int dy) const
     {
-        //half implementation - still needs to be implemented   
-        Piece* curr_piece = board.get_piece_at_pos(x,y);
-        if(!curr_piece->get_if_moved())
-        {
-            for(int i = 1;i<=3;i++)
-            {
-                if(board.get_piece_at_pos(x+i,y) != nullptr)
-                return false;
-            }
-
-            return true;
-        }
+        auto king_pos = this->get_curr_pos();
+        int x = king_pos.first;
+        int y = king_pos.second;
+        Piece* rook = (dy<0)?board.get_piece_at_pos(x,y+4*dy):board.get_piece_at_pos(x,y+3*dy);
+        if(rook == nullptr || rook->get_if_moved() )
         return false;
+        int ny = y + dy;
+        Piece* curr_piece = board.get_piece_at_pos(x,ny);
+
+        while(curr_piece != rook)
+        {
+            if(curr_piece != nullptr)
+            return false;
+
+           Piece* temp_piece = new King(x,ny,this->get_color());
+           if(temp_piece->can_be_captured(board))
+           return false;
+            
+            ny+=dy;
+            curr_piece = board.get_piece_at_pos(x,ny);
+        }
+
+        return true;
     }
 
 

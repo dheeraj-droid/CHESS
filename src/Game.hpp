@@ -19,6 +19,7 @@ class Game
     Game();
    
     bool is_promotion_possible(Piece* curr_piece,int y) const;
+    void execute_castling(const vector<pair<int, int>>& positions,Piece* p);
     void display_board_and_prompt() const;
     string get_player_move() const;
     void switch_player();

@@ -1,4 +1,4 @@
-Need to add castling for king.
+Need to add castling for king - done
 Need to add en passant and (pawn promotion for pawns.)-done
 
 
